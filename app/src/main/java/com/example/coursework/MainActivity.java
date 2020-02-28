@@ -6,15 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
+
 
 import java.util.ArrayList;
 
@@ -45,6 +39,15 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new MyAdapter(myDataset);
         recyclerView.setAdapter(mAdapter);
 
+
+        Button add_test = (Button) findViewById(R.id.button3);
+        add_test.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                myDataset.add("Test");
+                mAdapter.notifyItemInserted(myDataset.size()-1);
+                recyclerView.smoothScrollToPosition(myDataset.size());
+            }
+        });
 
         Button add_item = findViewById(R.id.button2);
         add_item.setOnClickListener(new View.OnClickListener() {
