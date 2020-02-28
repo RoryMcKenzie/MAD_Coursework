@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    public static ArrayList<String> myDataset = new ArrayList<String>();
+    public static ArrayList<String> myDataset = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             myDataset.add("Item " + i);
         }
 
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        recyclerView = findViewById(R.id.my_recycler_view);
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -34,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
 
 
-        Button add_test = (Button) findViewById(R.id.button3);
+        Button add_test = findViewById(R.id.button3);
         add_test.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 myDataset.add("Test");
                 mAdapter.notifyItemInserted(myDataset.size() - 1);
-                recyclerView.smoothScrollToPosition(myDataset.size());
+                recyclerView.scrollToPosition(myDataset.size() - 1);
             }
         });
 

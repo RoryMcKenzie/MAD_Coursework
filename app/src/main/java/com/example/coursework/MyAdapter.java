@@ -25,20 +25,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             title = itemView.findViewById(R.id.item_title);
             subtitle = itemView.findViewById(R.id.item_subtitle);
             checkbox = itemView.findViewById(R.id.item_checkbox);
+           //Strikes through text if checkbox checked
             checkbox.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     if(checkbox.isChecked()){
                         title.setPaintFlags(title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                         subtitle.setPaintFlags(subtitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
-
                     } else {
                         title.setPaintFlags(title.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                         subtitle.setPaintFlags(subtitle.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-
                     }
                 }
-
             });
         }
     }
@@ -48,12 +45,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     mDataset = myDataset;
     }
 
-
     // Create new views (invoked by the layout manager)
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent,
                                            int viewType) {
-
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
