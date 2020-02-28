@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private String[] myDataset = new String[5];
+    public static ArrayList<String> myDataset = new ArrayList<String>();
 
 
     @Override
@@ -31,12 +31,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myDataset[0]= "Item 1";
-        myDataset[1]= "Item 2";
-        myDataset[2]= "Item 3";
-        myDataset[3]= "Item 4";
-        myDataset[4]= "Item 5";
+        for (int i = 1; i <= 15; i++) {
 
+            myDataset.add("Item " + i);
+        }
 
 
         recyclerView = (RecyclerView)findViewById(R.id.my_recycler_view);
@@ -59,9 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
-
-
-
 
 
 
