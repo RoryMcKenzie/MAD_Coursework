@@ -1,6 +1,7 @@
 package com.example.coursework;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             title = itemView.findViewById(R.id.item_title);
             subtitle = itemView.findViewById(R.id.item_subtitle);
             checkbox = itemView.findViewById(R.id.item_checkbox);
+            checkbox.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v){
+                    if(checkbox.isChecked()){
+                        title.setPaintFlags(title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                        subtitle.setPaintFlags(subtitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+
+                    } else {
+                        title.setPaintFlags(title.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+                        subtitle.setPaintFlags(subtitle.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+
+                    }
+                }
+
+            });
         }
     }
 

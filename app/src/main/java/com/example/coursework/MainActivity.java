@@ -16,19 +16,16 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     public static ArrayList<String> myDataset = new ArrayList<String>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         for (int i = 1; i <= 15; i++) {
-
             myDataset.add("Item " + i);
         }
 
-
-        recyclerView = (RecyclerView)findViewById(R.id.my_recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -41,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         add_test.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 myDataset.add("Test");
-                mAdapter.notifyItemInserted(myDataset.size()-1);
+                mAdapter.notifyItemInserted(myDataset.size() - 1);
                 recyclerView.smoothScrollToPosition(myDataset.size());
             }
         });
@@ -53,12 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(activityA);
             }
         });
-
-
-
     }
-
-
 }
 
 

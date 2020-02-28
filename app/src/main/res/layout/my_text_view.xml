@@ -31,11 +31,9 @@
         android:layout_height="50dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginTop="8dp"
         android:paddingLeft="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </CheckBox>
+        app:layout_constraintTop_toTopOf="parent"></CheckBox>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
