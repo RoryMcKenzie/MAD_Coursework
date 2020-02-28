@@ -1,11 +1,15 @@
 package com.example.coursework;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,52 +20,32 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static ArrayList<String> toDoListArray;
-    public static ArrayAdapter<String> adapter;
-    public static ListView toDoList;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private String[] myDataset = new String[5];
 
-    class Item
-    {
-        public String title;
-        public String subtext;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final ListView toDoList = findViewById(R.id.todo_list);
-        toDoListArray = new ArrayList<>();
-
-         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1,
-                toDoListArray);
-
-         for (int i = 1; i <= 15; i++) {
-
-            toDoListArray.add("Item " + i);
-         }
-
-        toDoList.setAdapter(adapter);
-
-        Button add_test = (Button) findViewById(R.id.button3);
-        add_test.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                adapter.add("Test");
-                toDoList.smoothScrollToPosition(toDoListArray.size());
+        myDataset[0]= "Item 1";
+        myDataset[1]= "Item 2";
+        myDataset[2]= "Item 3";
+        myDataset[3]= "Item 4";
+        myDataset[4]= "Item 5";
 
 
-                String fulltext = "";
 
-                for(String text : toDoListArray)
-                {
-                    fulltext += text + ", ";
-                }
-                Log.e(getResources().getString(R.string.app_name), fulltext);
+        recyclerView = (RecyclerView)findViewById(R.id.my_recycler_view);
 
-            }
-        });
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        mAdapter = new MyAdapter(myDataset);
+        recyclerView.setAdapter(mAdapter);
 
 
         Button add_item = findViewById(R.id.button2);
@@ -72,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
-
-
 
 
 
