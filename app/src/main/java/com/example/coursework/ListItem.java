@@ -6,9 +6,13 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "list_table")
-public class ListItem {
+class ListItem {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    @ColumnInfo(name = "id")
+    private int mId;
+
     @NonNull
     @ColumnInfo(name = "title")
     private String mTitle;
@@ -20,7 +24,7 @@ public class ListItem {
     @ColumnInfo(name = "completed")
     private Boolean mCompleted;
 
-    public ListItem(@NonNull String title, String note, @NonNull Boolean completed){
+    public ListItem( @NonNull String title, String note, @NonNull Boolean completed){
         this.mTitle = title;
         this.mNote = note;
         this.mCompleted = completed;
@@ -29,6 +33,13 @@ public class ListItem {
     public ListItem getListItem(){
         ListItem temp = new ListItem(this.getMTitle(), this.getMNote(), this.getMCompleted());
         return temp;
+    }
+
+    public int getMId() {
+        return this.mId;
+    }
+    public void setMId(int id){
+        this.mId = id;
     }
 
     public String getMTitle() {

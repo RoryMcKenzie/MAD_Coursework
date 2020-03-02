@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -31,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
         mListItemViewModel = new ViewModelProvider(this).get(ListItemViewModel.class);
 
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                ((LinearLayoutManager) layoutManager).getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
         //Observer for LiveData returned by getAllItems()
         mListItemViewModel.getAllItems().observe(this, new Observer<List<ListItem>>() {
             @Override
@@ -40,7 +47,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button add_item = findViewById(R.id.button2);
+
+        Button test = findViewById(R.id.button_clear);
+        test.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mListItemViewModel.deleteAll();
+            }
+        });
+
+        FloatingActionButton add_item = findViewById(R.id.fab);
         add_item.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent activityA = new Intent(MainActivity.this, Activity_Add_Item.class);

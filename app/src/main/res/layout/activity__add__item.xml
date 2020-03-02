@@ -7,7 +7,7 @@
     tools:context=".Activity_Add_Item">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/et_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="43dp"
@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/et_note"
         android:layout_width="211dp"
         android:layout_height="147dp"
         android:layout_marginStart="43dp"
@@ -34,13 +34,15 @@
         android:layout_marginBottom="360dp"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Task Description"
-        android:inputType="textMultiLine"
+        android:hint="Note"
+        android:inputType="textPersonName"
+        android:imeOptions="actionDone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/et_title"
+        />
 
     <Button
         android:id="@+id/button"

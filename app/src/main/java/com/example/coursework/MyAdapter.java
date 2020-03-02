@@ -2,18 +2,15 @@ package com.example.coursework;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-
 
     // Provide a reference to the views for each data item
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -43,7 +40,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 
+    //Create inflater
     private final LayoutInflater mInflater;
+    //Create list of all items in to-do list
     private  List<ListItem> mItems;
 
     //Constructor for dataset
@@ -70,6 +69,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.title.setText(current.getMTitle());
         holder.subtitle.setText(current.getMNote());
         holder.checkbox.setChecked(current.getMCompleted());
+
     }
 
     void setListItems(List<ListItem> listItems){

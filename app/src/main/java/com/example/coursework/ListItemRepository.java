@@ -29,4 +29,11 @@ class ListItemRepository {
             mListItemDao.insert(listItem);
         });
     }
+
+    //Must be called on non-UI thread or throws exception
+    void deleteAll() {
+        ListItemRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mListItemDao.deleteAll();
+        });
+    }
 }
