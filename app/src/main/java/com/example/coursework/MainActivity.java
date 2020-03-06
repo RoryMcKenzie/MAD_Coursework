@@ -27,12 +27,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        final MyAdapter mAdapter = new MyAdapter(this);
-        recyclerView.setAdapter(mAdapter);
 
         mListItemViewModel = new ViewModelProvider(this).get(ListItemViewModel.class);
+
+        final MyAdapter mAdapter = new MyAdapter(this, mListItemViewModel);
+
+        recyclerView.setAdapter(mAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 ((LinearLayoutManager) layoutManager).getOrientation());
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         Button test = findViewById(R.id.button_clear);
         test.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mListItemViewModel.deleteAll();
+                mListItemViewModel.deleteAll();;
             }
         });
 

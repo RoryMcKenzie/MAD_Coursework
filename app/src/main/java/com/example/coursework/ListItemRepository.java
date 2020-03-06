@@ -36,4 +36,16 @@ class ListItemRepository {
             mListItemDao.deleteAll();
         });
     }
+
+    void check(int id){
+        ListItemRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mListItemDao.check(id);
+        });
+    }
+
+    void uncheck(int id){
+        ListItemRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mListItemDao.uncheck(id);
+        });
+    }
 }

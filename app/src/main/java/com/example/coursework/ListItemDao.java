@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -18,5 +19,12 @@ public interface ListItemDao {
 
     @Query("SELECT * from list_table ORDER BY id DESC")
     LiveData<List<ListItem>> getListItems();
+
+    @Query("UPDATE list_table SET completed = '1' WHERE id = :theId ")
+    void check(int theId);
+
+    @Query("UPDATE list_table SET completed = '0' WHERE id = :theId ")
+    void uncheck(int theId);
+
 
 }

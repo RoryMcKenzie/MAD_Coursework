@@ -38,7 +38,9 @@ class ListItem {
     public int getMId() {
         return this.mId;
     }
+
     public void setMId(int id){
+
         this.mId = id;
     }
 
@@ -52,5 +54,9 @@ class ListItem {
 
     public Boolean getMCompleted(){
         return this.mCompleted;
+    }
+
+    public void setMCompleted(Boolean completed) {
+        this.mCompleted = completed;
     }
 }

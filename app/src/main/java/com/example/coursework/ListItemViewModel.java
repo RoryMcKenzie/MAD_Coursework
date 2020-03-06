@@ -24,4 +24,9 @@ public class ListItemViewModel extends AndroidViewModel {
     public void insert(ListItem item) { mRepository.insert(item); }
 
     public void deleteAll() {mRepository.deleteAll();}
+
+    public void check(int id) {mRepository.check(id);}
+
+    public void uncheck(int id) {mRepository.uncheck(id);}
+
 }
