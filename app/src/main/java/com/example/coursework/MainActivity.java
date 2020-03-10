@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private ListItemViewModel mListItemViewModel;
     public static final int NEW_ITEM_ACTIVITY_REQUEST_CODE = 1;
 
+    public static final int RESULT_INVALID = 2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(mAdapter);
 
+        //Adds dividers between items in RecyclerView
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 ((LinearLayoutManager) layoutManager).getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
@@ -64,12 +68,14 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == NEW_ITEM_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             ListItem listItem = new ListItem(data.getStringExtra(Activity_Add_Item.EXTRA_REPLY), data.getStringExtra(Activity_Add_Item.EXTRA_REPLY2), false);
             mListItemViewModel.insert(listItem);
-        } else {
+        //RESULT_INVALID is returned if the title is empty, so that the toast doesn't appear when back is pressed
+        } else  if(resultCode == RESULT_INVALID){
             Toast.makeText(
                     getApplicationContext(),
-                    "Item is empty. Not added.",
+                    "Item has no title. Not added.",
                     Toast.LENGTH_LONG).show();
         }
+
     }
 }
 
