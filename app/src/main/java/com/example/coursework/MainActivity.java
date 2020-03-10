@@ -49,14 +49,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        Button test = findViewById(R.id.button_clear);
-        test.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mListItemViewModel.deleteAll();;
-            }
-        });
-
         FloatingActionButton add_item = findViewById(R.id.fab);
         add_item.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
