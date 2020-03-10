@@ -13,7 +13,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/item_checkbox"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toTopOf="parent">
+    </TextView>
 
     <TextView
         android:id="@+id/item_subtitle"
@@ -21,7 +22,8 @@
         android:layout_height="25dp"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/item_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/item_title"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/item_title">
+    </TextView>
 
     <CheckBox
         android:id="@+id/item_checkbox"
@@ -30,16 +32,31 @@
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:paddingLeft="10dp"
+        android:paddingStart="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" >
     </CheckBox>
 
     <TextView
         android:id="@+id/item_id"
         android:layout_width="23dp"
         android:layout_height="40dp"
-        app:layout_constraintStart_toEndOf="@+id/item_title"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+    </TextView>
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/ic_delete_forever_grey_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/item_id"
+        app:layout_constraintTop_toTopOf="parent" >
+    </Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

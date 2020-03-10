@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -13,12 +14,7 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-    //Stores the id of the record for each ViewHolder
-    //Currently not used
-    public static int recordId;
-
     private static ListItemViewModel mListItemViewModel;
-
 
     // Provide a reference to the views for each data item
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -26,6 +22,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public TextView subtitle;
         public CheckBox checkbox;
         public TextView id;
+        public Button delete;
 
         //Constructor
         public MyViewHolder(View v) {
@@ -35,6 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             subtitle = itemView.findViewById(R.id.item_subtitle);
             checkbox = itemView.findViewById(R.id.item_checkbox);
             id = itemView.findViewById(R.id.item_id);
+            delete = itemView.findViewById(R.id.button_delete);
 
 
 
@@ -44,7 +42,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                     if(checkbox.isChecked()){
                         // This works, but relies on a TextView I'd rather not exist (id)
                         // Also pretty sure this is bad programming, would like to find a better way
-                        //But this'll do for now
+                        // But this'll do for now
+                        // Now that the .check method works, strikethrough has broken, not sure why
                         mListItemViewModel.check(Integer.parseInt(id.getText().toString()));
                         title.setPaintFlags(title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                         subtitle.setPaintFlags(subtitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -53,6 +52,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                         title.setPaintFlags(title.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                         subtitle.setPaintFlags(subtitle.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                     }
+                }
+            });
+
+
+            delete.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v){
+                    mListItemViewModel.delete(Integer.parseInt(id.getText().toString()));
                 }
             });
         }
@@ -88,8 +94,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.title.setText(current.getMTitle());
         holder.subtitle.setText(current.getMNote());
         holder.checkbox.setChecked(current.getMCompleted());
-        recordId = current.getMId();
-        holder.id.setText(Integer.toString(recordId));
+        holder.id.setText(Integer.toString(current.getMId()));
     }
 
     // Update the cached copy of the items in the adapter

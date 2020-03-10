@@ -26,5 +26,8 @@ public interface ListItemDao {
     @Query("UPDATE list_table SET completed = '0' WHERE id = :theId ")
     void uncheck(int theId);
 
+    @Query("DELETE FROM list_table WHERE id = :theId")
+    void delete(int theId);
+
 
 }

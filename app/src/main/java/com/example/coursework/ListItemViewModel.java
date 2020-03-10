@@ -29,4 +29,6 @@ public class ListItemViewModel extends AndroidViewModel {
 
     public void uncheck(int id) {mRepository.uncheck(id);}
 
+    public void delete(int id) {mRepository.delete(id);}
+
 }

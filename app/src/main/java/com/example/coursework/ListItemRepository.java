@@ -48,4 +48,10 @@ class ListItemRepository {
             mListItemDao.uncheck(id);
         });
     }
+
+    void delete(int id){
+        ListItemRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mListItemDao.delete(id);
+        });
+    }
 }
