@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class Activity_Add_Item extends AppCompatActivity {
 
     //Unique tags for intent replies
@@ -28,7 +30,7 @@ public class Activity_Add_Item extends AppCompatActivity {
         mEditNote = findViewById(R.id.et_note);
 
 
-        Button add = (Button) findViewById(R.id.button);
+        FloatingActionButton add = (FloatingActionButton) findViewById(R.id.fab_save);
         add.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Intent replyIntent = new Intent();
