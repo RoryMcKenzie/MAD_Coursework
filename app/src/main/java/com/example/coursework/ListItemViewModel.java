@@ -12,14 +12,19 @@ public class ListItemViewModel extends AndroidViewModel {
     private ListItemRepository mRepository;
 
     private LiveData<List<ListItem>> mAllItems;
+    private LiveData<List<ListItem>> mAllItemsPriority;
+
 
     public ListItemViewModel (Application application) {
         super(application);
         mRepository = new ListItemRepository(application);
         mAllItems = mRepository.getAllListItems();
+        mAllItemsPriority = mRepository.getAllListItemsPriority();
     }
 
     LiveData<List<ListItem>> getAllItems() { return mAllItems; }
+    LiveData<List<ListItem>> getAllItemsPriority() { return mAllItemsPriority; }
+
 
     public void insert(ListItem item) { mRepository.insert(item); }
 

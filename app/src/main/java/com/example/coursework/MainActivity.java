@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -44,8 +43,18 @@ public class MainActivity extends AppCompatActivity {
                 ((LinearLayoutManager) layoutManager).getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+
+        /*
         //Observer for LiveData returned by getAllItems()
         mListItemViewModel.getAllItems().observe(this, new Observer<List<ListItem>>() {
+            @Override
+            public void onChanged(@Nullable final List<ListItem> items) {
+                // Update the cached copy of the items in the adapter.
+                mAdapter.setListItems(items);
+            }
+        }); */
+
+        mListItemViewModel.getAllItemsPriority().observe(this, new Observer<List<ListItem>>() {
             @Override
             public void onChanged(@Nullable final List<ListItem> items) {
                 // Update the cached copy of the items in the adapter.
@@ -66,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_ITEM_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            ListItem listItem = new ListItem(data.getStringExtra(Activity_Add_Item.EXTRA_REPLY), data.getStringExtra(Activity_Add_Item.EXTRA_REPLY2), false);
+            ListItem listItem = new ListItem(data.getStringExtra(Activity_Add_Item.EXTRA_REPLY), data.getStringExtra(Activity_Add_Item.EXTRA_REPLY2), false, data.getIntExtra(Activity_Add_Item.EXTRA_REPLY3, 0));
             mListItemViewModel.insert(listItem);
         //RESULT_INVALID is returned if the title is empty, so that the toast doesn't appear when back is pressed
         } else  if(resultCode == RESULT_INVALID){

@@ -20,6 +20,10 @@ public interface ListItemDao {
     @Query("SELECT * from list_table ORDER BY id DESC")
     LiveData<List<ListItem>> getListItems();
 
+    @Query("SELECT * FROM list_table order by priority DESC")
+    LiveData<List<ListItem>> getListItemsPriority();
+
+
     @Query("UPDATE list_table SET completed = '1' WHERE id = :theId ")
     void check(int theId);
 

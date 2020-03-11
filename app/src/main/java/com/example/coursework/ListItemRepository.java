@@ -10,11 +10,15 @@ class ListItemRepository {
 
     private ListItemDao mListItemDao;
     private LiveData<List<ListItem>> mAllListItems;
+    private LiveData<List<ListItem>> mAllListItemsPriority;
+
 
     ListItemRepository(Application application) {
         ListItemRoomDatabase db = ListItemRoomDatabase.getDatabase(application);
         mListItemDao = db.listItemDao();
         mAllListItems = mListItemDao.getListItems();
+        mAllListItemsPriority = mListItemDao.getListItemsPriority();
+
     }
 
     // Room executes all queries on a separate thread.
@@ -22,6 +26,10 @@ class ListItemRepository {
     LiveData<List<ListItem>> getAllListItems() {
         return mAllListItems;
     }
+    LiveData<List<ListItem>> getAllListItemsPriority() {
+        return mAllListItemsPriority;
+    }
+
 
     //Must be called on non-UI thread or throws exception
     void insert(ListItem listItem) {

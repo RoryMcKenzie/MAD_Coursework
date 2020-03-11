@@ -15,6 +15,7 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private static ListItemViewModel mListItemViewModel;
+    private Context context;
 
     // Provide a reference to the views for each data item
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -23,6 +24,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public CheckBox checkbox;
         public TextView id;
         public Button delete;
+        public TextView priority;
 
         //Constructor
         public MyViewHolder(View v) {
@@ -32,6 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             subtitle = itemView.findViewById(R.id.item_subtitle);
             checkbox = itemView.findViewById(R.id.item_checkbox);
             id = itemView.findViewById(R.id.item_id);
+            priority = itemView.findViewById(R.id.item_priority);
             delete = itemView.findViewById(R.id.button_delete);
 
 
@@ -45,12 +48,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                         // But this'll do for now
                         // Now that the .check method works, strikethrough has broken, not sure why
                         mListItemViewModel.check(Integer.parseInt(id.getText().toString()));
-                        title.setPaintFlags(title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                        subtitle.setPaintFlags(subtitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                        //title.setPaintFlags(title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                        //subtitle.setPaintFlags(subtitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     } else {
                         mListItemViewModel.uncheck(Integer.parseInt(id.getText().toString()));
-                        title.setPaintFlags(title.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-                        subtitle.setPaintFlags(subtitle.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+                        //title.setPaintFlags(title.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+                        //subtitle.setPaintFlags(subtitle.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                     }
                 }
             });
@@ -66,6 +69,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     //Create inflater
     private final LayoutInflater mInflater;
+
     //Create list of all items in to-do list
     private List<ListItem> mItems;
 
@@ -73,6 +77,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public MyAdapter(Context context, ListItemViewModel MListItemViewModel){
         mInflater = LayoutInflater.from(context);
         this.mListItemViewModel = MListItemViewModel;
+        this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -95,6 +100,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.subtitle.setText(current.getMNote());
         holder.checkbox.setChecked(current.getMCompleted());
         holder.id.setText(Integer.toString(current.getMId()));
+        switch (current.getMPriority()){
+            case 3: holder.priority.setText("Priority: \nHigh");
+                    holder.priority.setTextColor(context.getResources().getColor(R.color.highPriority));
+                break;
+            case 2: holder.priority.setText("Priority: \nMedium");
+                    holder.priority.setTextColor(context.getResources().getColor(R.color.mediumPriority));
+                break;
+            case 1: holder.priority.setText("Priority: \nLow");
+                    holder.priority.setTextColor(context.getResources().getColor(R.color.lowPriority));
+                break;
+            default: holder.priority.setText("Priority: \nNone");
+                break;
+        }
     }
 
     // Update the cached copy of the items in the adapter

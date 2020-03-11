@@ -24,16 +24,23 @@ class ListItem {
     @ColumnInfo(name = "completed")
     private Boolean mCompleted;
 
-    public ListItem( @NonNull String title, String note, @NonNull Boolean completed){
+    @ColumnInfo(name = "priority")
+    private int mPriority;
+
+
+    public ListItem( @NonNull String title, String note, @NonNull Boolean completed, int priority){
         this.mTitle = title;
         this.mNote = note;
         this.mCompleted = completed;
+        this.mPriority = priority;
     }
 
+    /*
     public ListItem getListItem(){
         ListItem temp = new ListItem(this.getMTitle(), this.getMNote(), this.getMCompleted());
         return temp;
     }
+    */
 
     public int getMId() {
         return this.mId;
@@ -58,5 +65,9 @@ class ListItem {
 
     public void setMCompleted(Boolean completed) {
         this.mCompleted = completed;
+    }
+
+    public int getMPriority(){
+        return this.mPriority;
     }
 }
