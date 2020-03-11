@@ -9,7 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -54,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }); */
 
+
+
+
+
         mListItemViewModel.getAllItemsPriority().observe(this, new Observer<List<ListItem>>() {
             @Override
             public void onChanged(@Nullable final List<ListItem> items) {
@@ -71,6 +80,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_main_actions, menu);
+
+        MenuItem mitem=menu.findItem(R.id.action_sort);
+        Spinner spin =(Spinner) mitem.getActionView();
+        setupSpinner(spin);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    public void setupSpinner(Spinner spin){
+        String[] items={"Sort by Highest Priority","Sort by Newest"};
+        //wrap the items in the Adapter
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,R.layout.actionbar_spinner, items);
+        //assign adapter to the Spinner
+        spin.setAdapter(adapter);
+    }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
