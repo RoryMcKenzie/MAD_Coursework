@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import java.util.List;
 
@@ -23,7 +22,6 @@ public interface ListItemDao {
     @Query("SELECT * FROM list_table order by priority DESC")
     LiveData<List<ListItem>> getListItemsPriority();
 
-
     @Query("UPDATE list_table SET completed = '1' WHERE id = :theId ")
     void check(int theId);
 
@@ -32,6 +30,4 @@ public interface ListItemDao {
 
     @Query("DELETE FROM list_table WHERE id = :theId")
     void delete(int theId);
-
-
 }

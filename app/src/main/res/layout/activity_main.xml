@@ -7,7 +7,6 @@
     tools:context=".MainActivity">
 
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         app:layout_constraintBottom_toBottomOf="parent"

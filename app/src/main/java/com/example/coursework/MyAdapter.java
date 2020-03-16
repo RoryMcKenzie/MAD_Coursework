@@ -1,7 +1,6 @@
 package com.example.coursework;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,33 +36,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             priority = itemView.findViewById(R.id.item_priority);
             delete = itemView.findViewById(R.id.button_delete);
 
-
-
-            //Strikes through text if checkbox checked
+            //Updates record in database when checkbox clicked
             checkbox.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     if(checkbox.isChecked()){
-                        // This works, but relies on a TextView I'd rather not exist (id)
-                        // Also pretty sure this is bad programming, would like to find a better way
-                        // But this'll do for now
-                        // Now that the .check method works, strikethrough has broken, not sure why
                         mListItemViewModel.check(Integer.parseInt(id.getText().toString()));
-                        //title.setPaintFlags(title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                        //subtitle.setPaintFlags(subtitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     } else {
                         mListItemViewModel.uncheck(Integer.parseInt(id.getText().toString()));
-                        //title.setPaintFlags(title.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-                        //subtitle.setPaintFlags(subtitle.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                     }
                 }
             });
-
 
             delete.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     mListItemViewModel.delete(Integer.parseInt(id.getText().toString()));
                 }
             });
+
         }
     }
 

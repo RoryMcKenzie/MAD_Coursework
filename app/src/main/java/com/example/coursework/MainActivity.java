@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,26 +22,29 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements androidx.lifecycle.LifecycleOwner{
 
     private ListItemViewModel mListItemViewModel;
     public static final int NEW_ITEM_ACTIVITY_REQUEST_CODE = 1;
-
     public static final int RESULT_INVALID = 2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Creates new RecyclerView
         RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        //Creates new ViewModel
         mListItemViewModel = new ViewModelProvider(this).get(ListItemViewModel.class);
 
+        //Creates new adapter
         final MyAdapter mAdapter = new MyAdapter(this, mListItemViewModel);
 
+        //Sets contents of recyclerView to the adapter
         recyclerView.setAdapter(mAdapter);
 
         //Adds dividers between items in RecyclerView
@@ -49,20 +53,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
 
-        /*
-        //Observer for LiveData returned by getAllItems()
-        mListItemViewModel.getAllItems().observe(this, new Observer<List<ListItem>>() {
-            @Override
-            public void onChanged(@Nullable final List<ListItem> items) {
-                // Update the cached copy of the items in the adapter.
-                mAdapter.setListItems(items);
-            }
-        }); */
-
-
-
-
-
+        //Observer for LiveData returned by getAllItemsPriority()
         mListItemViewModel.getAllItemsPriority().observe(this, new Observer<List<ListItem>>() {
             @Override
             public void onChanged(@Nullable final List<ListItem> items) {
@@ -72,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         FloatingActionButton add_item = findViewById(R.id.fab);
+
         add_item.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent activityA = new Intent(MainActivity.this, Activity_Add_Item.class);
@@ -80,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    //Replaces the action bar with new action bar with spinner
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -88,11 +82,10 @@ public class MainActivity extends AppCompatActivity {
         MenuItem mitem=menu.findItem(R.id.action_sort);
         Spinner spin =(Spinner) mitem.getActionView();
         setupSpinner(spin);
-
         return super.onCreateOptionsMenu(menu);
     }
 
-
+    //Setting up the spinner in the action bar
     public void setupSpinner(Spinner spin){
         String[] items={"Sort by Highest Priority","Sort by Newest"};
         //wrap the items in the Adapter
@@ -100,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
         //assign adapter to the Spinner
         spin.setAdapter(adapter);
     }
+
+    //When this activity is returned to from Activity_Add_Item,
+    //Processes the returned data and adds to database (if possible)
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -113,11 +109,5 @@ public class MainActivity extends AppCompatActivity {
                     "Item has no title. Not added.",
                     Toast.LENGTH_LONG).show();
         }
-
     }
 }
-
-
-
-
-

@@ -35,13 +35,6 @@ class ListItem {
         this.mPriority = priority;
     }
 
-    /*
-    public ListItem getListItem(){
-        ListItem temp = new ListItem(this.getMTitle(), this.getMNote(), this.getMCompleted());
-        return temp;
-    }
-    */
-
     public int getMId() {
         return this.mId;
     }

@@ -31,14 +31,13 @@ class ListItemRepository {
     }
 
 
-    //Must be called on non-UI thread or throws exception
+    //All methods must be called on non-UI thread or throws exception
     void insert(ListItem listItem) {
         ListItemRoomDatabase.databaseWriteExecutor.execute(() -> {
             mListItemDao.insert(listItem);
         });
     }
 
-    //Must be called on non-UI thread or throws exception
     void deleteAll() {
         ListItemRoomDatabase.databaseWriteExecutor.execute(() -> {
             mListItemDao.deleteAll();
